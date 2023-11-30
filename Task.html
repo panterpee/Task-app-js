@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="Task.css">
+</head>
+<body>
+    <div class="container">
+    <h1 style="text-shadow: 1.5px 1.5px rgb(45, 45, 45); opacity: 0.9;">Tasks Manager</h1><br>
+        <label for="addtask">Add Task:</label>
+        <input type="text" id="gettask" name="addtask" value="">
+        <button type="button" class="add-btn" onclick="addtask(event)">Add</button>
+        <br><br>
+      <div id="list">
+
+      </div>
+    </div>
+
+    <script>
+  let tasklist;
+
+        if (!localStorage.getItem("tasklist")) {
+            tasklist = [];
+        } else {
+            tasklist = JSON.parse(localStorage.getItem("tasklist"));
+            updateTaskList();
+        }
+
+        function addtask(event){
+            event.preventDefault();
+            let gettask = document.getElementById("gettask").value;
+            tasklist.push(gettask);
+            localStorage.setItem("tasklist", JSON.stringify(tasklist));
+            document.getElementById("gettask").value = "";
+            updateTaskList();
+        }
+
+        function deleteTask(index) {
+            tasklist.splice(index, 1);
+            localStorage.setItem("tasklist", JSON.stringify(tasklist));
+            updateTaskList();
+        }
+
+        function editTask(index) {
+            // Create an input field to edit the task
+            let listDiv = document.getElementById("list");
+            listDiv.innerHTML = tasklist.map((task, editIdx) => {
+                if (editIdx === index) {
+                    return `
+                        <div class="list">
+                            <input class="edit-input" type="text" value="${task}" id="editInput">
+                            <div>
+                                <button class='edit-button' onclick='updateEditedTask(${index})'>Update</button>
+                                <button class='delete-button' onclick='deleteTask(${index})'>Del</button>
+                            </div>
+                        </div>
+                    `
+                } else {
+                    return `
+                        <div class="list">
+                            <p title="${task}" onclick="alert('${task}')">${task}</p>
+                            <div>
+                                <button class='edit-button' onclick='editTask(${index})'>Edit</button>
+                                <button class='delete-button' onclick='deleteTask(${index})'>Del</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join("");
+        }
+
+        function updateEditedTask(index) {
+            // Update the task in the list
+            const editedTask = document.getElementById("editInput").value;
+            tasklist[index] = editedTask;
+            localStorage.setItem("tasklist", JSON.stringify(tasklist));
+            updateTaskList();
+        }
+
+        function updateTaskList() {
+            
+            let listDiv = document.getElementById("list");
+            listDiv.innerHTML = tasklist.map((task, index) => `
+                <div class="list">
+                    <p title="${task}" onclick="alert('${task}')">${task}</p>
+                    <div>
+                    <button class='edit-button' onclick='editTask(${index})'>Edit</button>
+                    <button class='delete-button' onclick='deleteTask(${index})'>Del</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+    </script> 
+</body>
+</html>

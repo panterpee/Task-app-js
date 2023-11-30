@@ -1,0 +1,109 @@
+body {
+    background-color: rgb(41, 41, 41);
+    background-image: url("BG.avif");
+    background-position: 10% 20%;
+    background-size: 80%;
+    background-size: cover;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+    
+}
+.container{
+    width: 500px;
+    margin-left: 10px;
+    /* background-color: rgb(176, 255, 255); */
+    padding: 10px 30px 30px 30px;
+    height: 90vh;
+    color: rgb(255, 255, 255);
+    background-color: rgba(142, 135, 152, 0.246);
+
+}
+
+input{
+    max-width: 300px;
+    width: 100%;
+    padding: 5px 0px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.edit-input{
+
+    width: 100%;
+    margin-right: 10px;
+}
+
+.list p{
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    cursor: pointer;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid rgba(128, 128, 128, 0.671);
+    padding-bottom: 10px;
+    height: auto;
+    margin-top: 20px;
+    max-width: 500px;
+    flex-wrap: wrap;
+}
+
+.list p{
+    min-width: 200px;
+}
+
+.delete-button {
+    padding: 3px 10px;
+    width: 50px;
+    margin-left: 0px;
+}
+
+
+.add-btn{
+    padding: 5px 5px;
+    width: 50px;
+    margin-left: 10px;
+}
+
+.edit-button{
+    padding: 3px 15px;
+}
+
+button {
+    background-color: rgb(94, 94, 94);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    input {
+        min-width: 150px;
+    }
+    .container {
+        width: 80%;
+    }
+    .add-btn{
+        margin-top: 5px;
+        margin-left: 0px;
+        padding: 5px 10px 5px 10px ;
+        width: 150px;
+    }
+
+    .list p {
+        padding-bottom: 15px;
+    }
+
+    .list input {
+        margin-bottom: 15px;
+    }
+    
+    .list button {
+        padding: 5px 15px;
+        width: 100px;
+    }
+}
